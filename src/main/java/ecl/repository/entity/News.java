@@ -27,7 +27,7 @@ public class News implements BaseEntity<Long>{
 
     private String title;
 
-    private String subject;
+    private String text;
 
     @OneToMany
     private List<Comment> comments = new ArrayList<>();
