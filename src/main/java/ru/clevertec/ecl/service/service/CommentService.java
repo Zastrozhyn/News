@@ -1,5 +1,6 @@
 package ru.clevertec.ecl.service.service;
 
+import org.springframework.data.domain.Pageable;
 import ru.clevertec.ecl.repository.entity.Comment;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface CommentService {
 
     Comment findCommentById(Long id);
 
-    List<Comment> findAllComment(Integer page, Integer pageSize);
+    List<Comment> findAllComment(Pageable pageable);
 
     Comment updateComment(Comment comment);
 

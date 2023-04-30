@@ -1,5 +1,6 @@
 package ru.clevertec.ecl.service.service;
 
+import org.springframework.data.domain.Pageable;
 import ru.clevertec.ecl.repository.entity.News;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface NewsService {
 
     News findNewsById(Long id);
 
-    List<News> findAllNews(Integer page, Integer pageSize);
+    List<News> findAllNews(Pageable pageable);
 
     News updateNews(News news);
 

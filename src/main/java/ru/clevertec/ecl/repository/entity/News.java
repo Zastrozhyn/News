@@ -31,4 +31,15 @@ public class News implements BaseEntity<Long>{
 
     @OneToMany
     private List<Comment> comments = new ArrayList<>();
+
+    @PrePersist
+    public void onCreate(){
+        createTime = LocalDateTime.now();
+        updateTime = createTime;
+    }
+
+    @PreUpdate
+    public void onUpdate(){
+        updateTime = LocalDateTime.now();
+    }
 }

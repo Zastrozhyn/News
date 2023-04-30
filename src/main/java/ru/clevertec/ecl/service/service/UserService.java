@@ -1,5 +1,6 @@
 package ru.clevertec.ecl.service.service;
 
+import org.springframework.data.domain.Pageable;
 import ru.clevertec.ecl.repository.entity.User;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface UserService {
 
     User findUserById(Long id);
 
-    List<User> findAllUser(Integer page, Integer pageSize);
+    List<User> findAllUser(Pageable pageable);
 
     User updateUser(User user);
 

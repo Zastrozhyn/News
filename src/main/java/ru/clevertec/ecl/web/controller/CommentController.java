@@ -2,6 +2,7 @@ package ru.clevertec.ecl.web.controller;
 
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.clevertec.ecl.service.service.CommentService;
@@ -33,8 +34,8 @@ public class CommentController {
     }
 
     @GetMapping()
-    public List<CommentDto> findAllComment() {
-        return null;
+    public List<CommentDto> findAllComment(Pageable pageable) {
+        return mapper.mapToDto(commentService.findAllComment(pageable));
     }
 
     @DeleteMapping(value = "/{commentId}")

@@ -1,4 +1,4 @@
-package ru.clevertec.ecl.web;
+package ru.clevertec.ecl;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -2,6 +2,7 @@ package ru.clevertec.ecl.web.controller;
 
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.clevertec.ecl.service.service.NewsService;
@@ -34,8 +35,8 @@ public class NewsController {
     }
 
     @GetMapping()
-    public List<NewsDto> findAllNews() {
-        return null;
+    public List<NewsDto> findAllNews(Pageable pageable) {
+        return mapper.mapToDto(newsService.findAllNews(pageable));
     }
 
     @DeleteMapping(value = "/{newsId}")

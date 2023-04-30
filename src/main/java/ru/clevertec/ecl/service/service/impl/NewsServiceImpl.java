@@ -1,11 +1,12 @@
 package ru.clevertec.ecl.service.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import ru.clevertec.ecl.repository.dao.NewsRepository;
 import ru.clevertec.ecl.repository.entity.News;
 import ru.clevertec.ecl.service.exception.EntityException;
 import ru.clevertec.ecl.service.service.NewsService;
 import ru.clevertec.ecl.service.util.validator.NewsValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.clevertec.ecl.service.exception.ExceptionCode;
 
@@ -15,12 +16,14 @@ import java.util.List;
 public class NewsServiceImpl implements NewsService {
 
     private final NewsValidator newsValidator;
-    private NewsRepository newsRepository;
+    private final NewsRepository newsRepository;
 
     @Autowired
-    public NewsServiceImpl(NewsValidator newsValidator) {
+    public NewsServiceImpl(NewsValidator newsValidator, NewsRepository newsRepository) {
         this.newsValidator = newsValidator;
+        this.newsRepository = newsRepository;
     }
+
 
     @Override
     public News createNews(News news) {
@@ -36,8 +39,8 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<News> findAllNews(Integer page, Integer pageSize) {
-        return null;
+    public List<News> findAllNews(Pageable pageable) {
+        return newsRepository.findAll(pageable).getContent();
     }
 
     @Override

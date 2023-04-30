@@ -1,11 +1,12 @@
 package ru.clevertec.ecl.service.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import ru.clevertec.ecl.repository.dao.CommentRepository;
 import ru.clevertec.ecl.repository.entity.Comment;
 import ru.clevertec.ecl.service.exception.EntityException;
 import ru.clevertec.ecl.service.service.CommentService;
 import ru.clevertec.ecl.service.util.validator.CommentValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.clevertec.ecl.service.exception.ExceptionCode;
 
@@ -15,12 +16,14 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
 
     private final CommentValidator commentValidator;
-    private CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
 
     @Autowired
-    public CommentServiceImpl(CommentValidator commentValidator) {
+    public CommentServiceImpl(CommentValidator commentValidator, CommentRepository commentRepository) {
         this.commentValidator = commentValidator;
+        this.commentRepository = commentRepository;
     }
+
 
     @Override
     public Comment createComment(Comment comment) {
@@ -36,8 +39,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> findAllComment(Integer page, Integer pageSize) {
-        return null;
+    public List<Comment> findAllComment(Pageable pageable) {
+        return commentRepository.findAll(pageable).getContent();
     }
 
     @Override

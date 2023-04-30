@@ -1,11 +1,12 @@
 package ru.clevertec.ecl.service.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import ru.clevertec.ecl.repository.dao.UserRepository;
 import ru.clevertec.ecl.repository.entity.User;
 import ru.clevertec.ecl.service.exception.EntityException;
 import ru.clevertec.ecl.service.service.UserService;
 import ru.clevertec.ecl.service.util.validator.UserValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.clevertec.ecl.service.exception.ExceptionCode;
 
@@ -15,12 +16,14 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserValidator userValidator;
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserValidator userValidator) {
+    public UserServiceImpl(UserValidator userValidator, UserRepository userRepository) {
         this.userValidator = userValidator;
+        this.userRepository = userRepository;
     }
+
 
     @Override
     public User createUser(User user) {
@@ -36,8 +39,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllUser(Integer page, Integer pageSize) {
-        return null;
+    public List<User> findAllUser(Pageable pageable) {
+        return userRepository.findAll(pageable).getContent();
     }
 
     @Override
