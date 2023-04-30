@@ -21,4 +21,7 @@ public class Comment implements BaseEntity<Long>{
     private LocalDateTime creationTime;
 
     private String text;
+
+    @ManyToOne
+    private User user;
 }

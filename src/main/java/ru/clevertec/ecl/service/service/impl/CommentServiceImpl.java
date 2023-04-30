@@ -14,17 +14,16 @@ import java.util.List;
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    private final CommentRepository commentRepository;
     private final CommentValidator commentValidator;
+    private CommentRepository commentRepository;
 
     @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository, CommentValidator commentValidator) {
-        this.commentRepository = commentRepository;
+    public CommentServiceImpl(CommentValidator commentValidator) {
         this.commentValidator = commentValidator;
     }
 
     @Override
-    public Comment createUser(Comment comment) {
+    public Comment createComment(Comment comment) {
         if (!commentValidator.isCommentValid(comment)) {
             throw new EntityException(ExceptionCode.NOT_VALID_COMMENT.getErrorCode());
         }
@@ -32,17 +31,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment findUserById(Long id) {
+    public Comment findCommentById(Long id) {
         return commentRepository.findById(id).orElseThrow(() -> new EntityException(ExceptionCode.COMMENT_NOT_FOUND.getErrorCode()));
     }
 
     @Override
-    public List<Comment> findAllUser(Integer page, Integer pageSize) {
+    public List<Comment> findAllComment(Integer page, Integer pageSize) {
         return null;
     }
 
     @Override
-    public Comment updateUser(Comment comment) {
+    public Comment updateComment(Comment comment) {
         if (!commentValidator.isCommentValid(comment)) {
             throw new EntityException(ExceptionCode.NOT_VALID_COMMENT.getErrorCode());
         }
@@ -50,7 +49,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public void deleteComment(Long id) {
         if (!commentRepository.existsById(id)) {
             throw new EntityException(ExceptionCode.COMMENT_NOT_FOUND.getErrorCode());
         }

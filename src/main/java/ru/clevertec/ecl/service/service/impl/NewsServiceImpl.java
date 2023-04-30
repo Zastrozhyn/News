@@ -14,12 +14,11 @@ import java.util.List;
 @Service
 public class NewsServiceImpl implements NewsService {
 
-    private final NewsRepository newsRepository;
     private final NewsValidator newsValidator;
+    private NewsRepository newsRepository;
 
     @Autowired
-    public NewsServiceImpl(NewsRepository newsRepository, NewsValidator newsValidator) {
-        this.newsRepository = newsRepository;
+    public NewsServiceImpl(NewsValidator newsValidator) {
         this.newsValidator = newsValidator;
     }
 

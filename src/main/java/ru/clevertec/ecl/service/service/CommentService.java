@@ -5,13 +5,13 @@ import ru.clevertec.ecl.repository.entity.Comment;
 import java.util.List;
 
 public interface CommentService {
-    Comment createUser(Comment comment);
+    Comment createComment(Comment comment);
 
-    Comment findUserById(Long id);
+    Comment findCommentById(Long id);
 
-    List<Comment> findAllUser(Integer page, Integer pageSize);
+    List<Comment> findAllComment(Integer page, Integer pageSize);
 
-    Comment updateUser(Comment comment);
+    Comment updateComment(Comment comment);
 
-    void deleteUser(Long id);
+    void deleteComment(Long id);
 }
