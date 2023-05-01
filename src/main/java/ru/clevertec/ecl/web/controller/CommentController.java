@@ -3,7 +3,6 @@ package ru.clevertec.ecl.web.controller;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.clevertec.ecl.service.service.CommentService;
 import ru.clevertec.ecl.web.dto.CommentDto;
@@ -22,12 +21,6 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public CommentDto createComment(@RequestBody CommentDto commentDto) {
-        return mapper.mapToDto(commentService.createComment(mapper.mapToEntity(commentDto)));
-    }
-
     @GetMapping("/{id}")
     public CommentDto findCommentById(@PathVariable Long id) {
         return mapper.mapToDto(commentService.findCommentById(id));
@@ -38,9 +31,11 @@ public class CommentController {
         return mapper.mapToDto(commentService.findAllComment(pageable));
     }
 
-    @DeleteMapping(value = "/{commentId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTag(@PathVariable(name = "commentId") Long id) {
-        commentService.deleteComment(id);
+    @PutMapping("/{commentId}")
+    public CommentDto updateComment(@PathVariable Long commentId,
+                              @RequestBody CommentDto commentDto) {
+        commentService.findCommentById(commentId);
+        commentDto.setId(commentId);
+        return mapper.mapToDto(commentService.updateComment(mapper.mapToEntity(commentDto)));
     }
 }

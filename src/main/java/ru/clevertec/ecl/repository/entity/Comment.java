@@ -1,6 +1,7 @@
 package ru.clevertec.ecl.repository.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "comment")
 public class Comment implements BaseEntity<Long>{
@@ -24,8 +26,13 @@ public class Comment implements BaseEntity<Long>{
 
     private String text;
 
-    @ManyToOne
-    private User user;
+    private Long userId;
+
+    private Long newsId;
+
+    public Comment(String text) {
+        this.text = text;
+    }
 
     @PrePersist
     public void onCreate(){

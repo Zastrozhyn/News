@@ -1,7 +1,6 @@
 package ru.clevertec.ecl.web.dto;
 
 import lombok.*;
-import ru.clevertec.ecl.repository.entity.User;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +11,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CommentDto {
     private Long id;
-    private LocalDateTime creationTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
     private String text;
-    private User user;
+    private Long userId;
+    private Long newsId;
 }

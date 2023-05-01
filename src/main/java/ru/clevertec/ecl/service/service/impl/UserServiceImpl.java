@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-
     @Override
     public User createUser(User user) {
         if (!userValidator.isUserValid(user)) {
@@ -34,8 +33,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new EntityException(ExceptionCode.USER_NOT_FOUND.getErrorCode()));
+    public User findUserById(Long userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new EntityException(ExceptionCode.USER_NOT_FOUND.getErrorCode()));
     }
 
     @Override
@@ -44,18 +43,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user) {
-        if (!userValidator.isUserValid(user)) {
+    public User updateUser(User updatedUser) {
+        if (!userValidator.isUserValid(updatedUser)) {
             throw new EntityException(ExceptionCode.NOT_VALID_USER_NAME.getErrorCode());
         }
+        User user = findUserById(updatedUser.getId());
+        user.setName(updatedUser.getName());
         return userRepository.save(user);
     }
 
     @Override
-    public void deleteUser(Long id) {
-        if (!userRepository.existsById(id)) {
+    public void deleteUser(Long userId) {
+        if (!userRepository.existsById(userId)) {
             throw new EntityException(ExceptionCode.USER_NOT_FOUND.getErrorCode());
         }
-        userRepository.deleteById(id);
+        userRepository.deleteById(userId);
     }
 }

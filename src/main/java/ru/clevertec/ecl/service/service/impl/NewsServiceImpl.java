@@ -34,8 +34,8 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public News findNewsById(Long id) {
-        return newsRepository.findById(id).orElseThrow(() -> new EntityException(ExceptionCode.NEWS_NOT_FOUND.getErrorCode()));
+    public News findNewsById(Long newsId) {
+        return newsRepository.findById(newsId).orElseThrow(() -> new EntityException(ExceptionCode.NEWS_NOT_FOUND.getErrorCode()));
     }
 
     @Override
@@ -44,18 +44,21 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public News updateNews(News news) {
-        if (!newsValidator.isNewsValid(news)) {
+    public News updateNews(News updatedNews) {
+        if (!newsValidator.isNewsValid(updatedNews)) {
             throw new EntityException(ExceptionCode.NOT_VALID_NEWS.getErrorCode());
         }
+        News news = findNewsById(updatedNews.getId());
+        news.setText(updatedNews.getText());
+        news.setTitle(updatedNews.getTitle());
         return newsRepository.save(news);
     }
 
     @Override
-    public void deleteNews(Long id) {
-        if (!newsRepository.existsById(id)) {
+    public void deleteNews(Long newsId) {
+        if (!newsRepository.existsById(newsId)) {
             throw new EntityException(ExceptionCode.NEWS_NOT_FOUND.getErrorCode());
         }
-        newsRepository.deleteById(id);
+        newsRepository.deleteById(newsId);
     }
 }

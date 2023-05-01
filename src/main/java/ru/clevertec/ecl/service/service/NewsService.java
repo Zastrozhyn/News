@@ -8,11 +8,11 @@ import java.util.List;
 public interface NewsService {
     News createNews(News news);
 
-    News findNewsById(Long id);
+    News findNewsById(Long newsId);
 
     List<News> findAllNews(Pageable pageable);
 
-    News updateNews(News news);
+    News updateNews(News updatedNews);
 
-    void deleteNews(Long id);
+    void deleteNews(Long newsId);
 }

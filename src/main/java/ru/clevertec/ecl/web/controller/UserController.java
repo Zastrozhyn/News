@@ -30,9 +30,9 @@ public class UserController {
         return mapper.mapToDto(userService.createUser(mapper.mapToEntity(userDto)));
     }
 
-    @GetMapping("/{id}")
-    public UserDto findUserById(@PathVariable Long id) {
-        return mapper.mapToDto(userService.findUserById(id));
+    @GetMapping("/{userId}")
+    public UserDto findUserById(@PathVariable Long userId) {
+        return mapper.mapToDto(userService.findUserById(userId));
     }
 
     @GetMapping()
@@ -40,9 +40,16 @@ public class UserController {
         return mapper.mapToDto(userService.findAllUser(pageable));
     }
 
+    @PutMapping("/{userId}")
+    public UserDto updateUser(@PathVariable Long userId,
+                              @RequestBody UserDto userDto) {
+        userDto.setId(userId);
+        return mapper.mapToDto(userService.updateUser(mapper.mapToEntity(userDto)));
+    }
+
     @DeleteMapping(value = "/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTag(@PathVariable(name = "userId") Long id) {
+    public void deleteUser(@PathVariable(name = "userId") Long id) {
         userService.deleteUser(id);
     }
 }

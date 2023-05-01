@@ -29,7 +29,7 @@ public class News implements BaseEntity<Long>{
 
     private String text;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> comments = new ArrayList<>();
 
     @PrePersist
@@ -41,5 +41,13 @@ public class News implements BaseEntity<Long>{
     @PreUpdate
     public void onUpdate(){
         updateTime = LocalDateTime.now();
+    }
+
+    public void addComment(Comment comment){
+        comments.add(comment);
+    }
+
+    public void removeComment(Comment comment){
+        comments.remove(comment);
     }
 }

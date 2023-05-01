@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.clevertec.ecl.repository.entity.Comment;
+import ru.clevertec.ecl.repository.entity.News;
+import ru.clevertec.ecl.service.service.CommentService;
 import ru.clevertec.ecl.service.service.NewsService;
 import ru.clevertec.ecl.web.dto.NewsDto;
 import ru.clevertec.ecl.web.mapper.NewsMapper;
@@ -17,16 +20,35 @@ public class NewsController {
 
     private final NewsMapper mapper = Mappers.getMapper(NewsMapper.class);
     private final NewsService newsService;
+    private final CommentService commentService;
 
     @Autowired
-    public NewsController(NewsService newsService) {
+    public NewsController(NewsService newsService, CommentService commentService) {
         this.newsService = newsService;
+        this.commentService = commentService;
     }
+
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public NewsDto createNews(@RequestBody NewsDto newsDto) {
         return mapper.mapToDto(newsService.createNews(mapper.mapToEntity(newsDto)));
+    }
+
+    @PostMapping("/{newsId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public NewsDto createComment(@RequestParam(name = "userId") Long userId,
+                                 @RequestParam(name = "text") String text,
+                                 @PathVariable Long newsId) {
+        commentService.createComment(new Comment(text), userId, newsId);
+        return mapper.mapToDto(newsService.findNewsById(newsId));
+    }
+
+    @PatchMapping("/{newsId}")
+    public NewsDto deleteComment(@RequestParam(name = "commentId") Long commentId,
+                                 @PathVariable Long newsId) {
+        commentService.deleteComment(commentId, newsId);
+        return mapper.mapToDto(newsService.findNewsById(newsId));
     }
 
     @GetMapping("/{id}")
@@ -41,7 +63,14 @@ public class NewsController {
 
     @DeleteMapping(value = "/{newsId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTag(@PathVariable(name = "newsId") Long id) {
-        newsService.deleteNews(id);
+    public void deleteNews(@PathVariable(name = "newsId") Long newsId) {
+        newsService.deleteNews(newsId);
+    }
+
+    @PutMapping("/{newsId}")
+    public NewsDto updateNews(@PathVariable(name = "newsId") Long newsId,
+                              @RequestBody NewsDto newsDto){
+        newsDto.setId(newsId);
+        return mapper.mapToDto(newsService.updateNews(mapper.mapToEntity(newsDto)));
     }
 }

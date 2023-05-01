@@ -8,11 +8,11 @@ import java.util.List;
 public interface UserService {
     User createUser(User user);
 
-    User findUserById(Long id);
+    User findUserById(Long userId);
 
     List<User> findAllUser(Pageable pageable);
 
-    User updateUser(User user);
+    User updateUser(User updatedUser);
 
-    void deleteUser(Long id);
+    void deleteUser(Long userId);
 }
