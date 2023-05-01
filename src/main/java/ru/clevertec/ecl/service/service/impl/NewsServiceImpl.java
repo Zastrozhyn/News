@@ -9,6 +9,7 @@ import ru.clevertec.ecl.service.service.NewsService;
 import ru.clevertec.ecl.service.util.validator.NewsValidator;
 import org.springframework.stereotype.Service;
 import ru.clevertec.ecl.service.exception.ExceptionCode;
+import ru.clevertec.ecl.web.dto.SearchFilter;
 
 import java.util.List;
 
@@ -60,5 +61,12 @@ public class NewsServiceImpl implements NewsService {
             throw new EntityException(ExceptionCode.NEWS_NOT_FOUND.getErrorCode());
         }
         newsRepository.deleteById(newsId);
+    }
+
+    @Override
+    public List<News> findAllByFilter(Pageable pageable, SearchFilter filter) {
+        return newsRepository
+                .findAllByTextContainingIgnoreCaseOrTitleContainingIgnoreCase(pageable, filter.text(), filter.title())
+                .getContent();
     }
 }

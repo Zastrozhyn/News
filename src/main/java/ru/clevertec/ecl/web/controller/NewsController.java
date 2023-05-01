@@ -10,6 +10,7 @@ import ru.clevertec.ecl.repository.entity.News;
 import ru.clevertec.ecl.service.service.CommentService;
 import ru.clevertec.ecl.service.service.NewsService;
 import ru.clevertec.ecl.web.dto.NewsDto;
+import ru.clevertec.ecl.web.dto.SearchFilter;
 import ru.clevertec.ecl.web.mapper.NewsMapper;
 
 import java.util.List;
@@ -57,7 +58,14 @@ public class NewsController {
     }
 
     @GetMapping()
-    public List<NewsDto> findAllNews(Pageable pageable) {
+    public List<NewsDto> findAllNews(@RequestParam(required = false, name = "search") String search,
+                                     @RequestParam(required = false, name = "text") String text,
+                                     @RequestParam(required = false, name = "title") String title,
+                                     Pageable pageable) {
+        if(search != null){
+            SearchFilter filter = new SearchFilter(text, title);
+            return mapper.mapToDto(newsService.findAllByFilter(pageable, filter));
+        }
         return mapper.mapToDto(newsService.findAllNews(pageable));
     }
 

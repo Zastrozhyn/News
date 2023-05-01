@@ -14,6 +14,7 @@ import ru.clevertec.ecl.service.service.UserService;
 import ru.clevertec.ecl.service.util.validator.CommentValidator;
 import org.springframework.stereotype.Service;
 import ru.clevertec.ecl.service.exception.ExceptionCode;
+import ru.clevertec.ecl.web.dto.SearchFilter;
 
 import java.util.List;
 
@@ -77,5 +78,10 @@ public class CommentServiceImpl implements CommentService {
         news.removeComment(comment);
         commentRepository.deleteById(commentId);
         newsService.updateNews(news);
+    }
+
+    @Override
+    public List<Comment> findByFilter(SearchFilter filter, Pageable pageable) {
+        return commentRepository.findAllByTextContainingIgnoreCase(pageable, filter.text()).getContent();
     }
 }

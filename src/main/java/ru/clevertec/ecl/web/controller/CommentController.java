@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import ru.clevertec.ecl.service.service.CommentService;
 import ru.clevertec.ecl.web.dto.CommentDto;
+import ru.clevertec.ecl.web.dto.SearchFilter;
 import ru.clevertec.ecl.web.mapper.CommentMapper;
 
 import java.util.List;
@@ -27,10 +28,15 @@ public class CommentController {
     }
 
     @GetMapping()
-    public List<CommentDto> findAllComment(Pageable pageable) {
+    public List<CommentDto> findAllComment(@RequestParam(required = false, name = "search") String search,
+                                           @RequestParam(required = false, name = "text") String text,
+                                           Pageable pageable) {
+        if(search != null){
+            SearchFilter filter = new SearchFilter(text, null);
+            return mapper.mapToDto(commentService.findByFilter(filter, pageable));
+        }
         return mapper.mapToDto(commentService.findAllComment(pageable));
     }
-
     @PutMapping("/{commentId}")
     public CommentDto updateComment(@PathVariable Long commentId,
                               @RequestBody CommentDto commentDto) {
