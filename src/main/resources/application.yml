@@ -3,3 +3,5 @@ spring:
     password: postgres
     username: postgres
     url: jdbc:postgresql://localhost:5432/news
+  liquibase:
+    enabled: true
