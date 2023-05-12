@@ -1,6 +1,7 @@
 package ru.clevertec.ecl.service.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
 import ru.clevertec.ecl.repository.dao.UserRepository;
 import ru.clevertec.ecl.repository.entity.User;
@@ -19,7 +20,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserValidator userValidator, UserRepository userRepository) {
+    public UserServiceImpl(UserValidator userValidator, @Qualifier("userDaoProxy")UserRepository userRepository) {
         this.userValidator = userValidator;
         this.userRepository = userRepository;
     }

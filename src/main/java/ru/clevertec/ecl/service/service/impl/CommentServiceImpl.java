@@ -1,6 +1,7 @@
 package ru.clevertec.ecl.service.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.ecl.repository.dao.CommentRepository;
@@ -27,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
     private final NewsService newsService;
 
     @Autowired
-    public CommentServiceImpl(CommentValidator commentValidator, CommentRepository commentRepository,
+    public CommentServiceImpl(CommentValidator commentValidator, @Qualifier("commentDaoProxy")CommentRepository commentRepository,
                               UserService userService, NewsService newsService) {
         this.commentValidator = commentValidator;
         this.commentRepository = commentRepository;

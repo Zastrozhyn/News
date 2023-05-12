@@ -1,6 +1,7 @@
 package ru.clevertec.ecl.service.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
 import ru.clevertec.ecl.repository.dao.NewsRepository;
 import ru.clevertec.ecl.repository.entity.News;
@@ -20,7 +21,7 @@ public class NewsServiceImpl implements NewsService {
     private final NewsRepository newsRepository;
 
     @Autowired
-    public NewsServiceImpl(NewsValidator newsValidator, NewsRepository newsRepository) {
+    public NewsServiceImpl(NewsValidator newsValidator, @Qualifier("newsDaoProxy")NewsRepository newsRepository) {
         this.newsValidator = newsValidator;
         this.newsRepository = newsRepository;
     }
