@@ -18,6 +18,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.liquibase:liquibase-core'
     implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.3.Final'
+    testImplementation 'ch.qos.logback:logback-classic:1.4.7'
     annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.5.3.Final'
     runtimeOnly 'org.postgresql:postgresql'
 

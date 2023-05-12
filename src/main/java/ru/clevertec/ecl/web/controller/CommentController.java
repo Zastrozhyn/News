@@ -4,6 +4,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import ru.clevertec.ecl.service.annotation.Log;
 import ru.clevertec.ecl.service.service.CommentService;
 import ru.clevertec.ecl.web.dto.CommentDto;
 import ru.clevertec.ecl.web.dto.SearchFilter;
@@ -11,6 +12,7 @@ import ru.clevertec.ecl.web.mapper.CommentMapper;
 
 import java.util.List;
 
+@Log
 @RestController
 @RequestMapping("/comments")
 public class CommentController {

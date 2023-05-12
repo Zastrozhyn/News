@@ -5,6 +5,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/news
   liquibase:
     enabled: true
+  jpa:
+    show-sql: true
 cache:
   capacity: 10
   type: LRU

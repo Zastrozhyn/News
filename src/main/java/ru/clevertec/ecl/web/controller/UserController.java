@@ -5,12 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.clevertec.ecl.service.annotation.Log;
 import ru.clevertec.ecl.service.service.UserService;
 import ru.clevertec.ecl.web.dto.UserDto;
 import ru.clevertec.ecl.web.mapper.UserMapper;
 
 import java.util.List;
 
+@Log
 @RestController
 @RequestMapping("/users")
 public class UserController {

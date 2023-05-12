@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.clevertec.ecl.repository.entity.Comment;
+import ru.clevertec.ecl.service.annotation.Log;
 import ru.clevertec.ecl.service.service.CommentService;
 import ru.clevertec.ecl.service.service.NewsService;
 import ru.clevertec.ecl.web.dto.NewsDto;
@@ -14,6 +15,7 @@ import ru.clevertec.ecl.web.mapper.NewsMapper;
 
 import java.util.List;
 
+@Log
 @RestController
 @RequestMapping("/news")
 public class NewsController {

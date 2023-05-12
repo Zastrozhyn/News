@@ -24,8 +24,7 @@ public class ExceptionControllerAdviser {
 
     @ExceptionHandler(EntityException.class)
     public ResponseEntity<ExceptionResponse> handleEntityNotFoundException(EntityException e, Locale locale) {
-        return buildErrorResponse(resolveResourceBundle(getMessageByCode(e.getErrorCode()), locale), e.getErrorCode()
-        );
+        return buildErrorResponse(resolveResourceBundle(getMessageByCode(e.getErrorCode()), locale), e.getErrorCode(), e.getTimeStamp());
     }
 
     private String resolveResourceBundle(String key, Locale locale) {
@@ -35,8 +34,8 @@ public class ExceptionControllerAdviser {
         return bundleMessageSource.getMessage(key, null, locale);
     }
 
-    private ResponseEntity<ExceptionResponse> buildErrorResponse(String message, Integer code) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse(message, code);
+    private ResponseEntity<ExceptionResponse> buildErrorResponse(String message, Integer code, String timeStamp) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(message, code, timeStamp);
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
