@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Getter
 public class EntityException extends RuntimeException {
-    public final String timeStamp;
+    private final String timeStamp;
     private final int errorCode;
 
     public EntityException(int errorCode) {
