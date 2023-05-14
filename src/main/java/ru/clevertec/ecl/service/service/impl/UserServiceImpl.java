@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
 import ru.clevertec.ecl.repository.dao.UserRepository;
 import ru.clevertec.ecl.repository.entity.User;
+import ru.clevertec.ecl.service.annotation.Log;
 import ru.clevertec.ecl.service.exception.EntityException;
 import ru.clevertec.ecl.service.service.UserService;
 import ru.clevertec.ecl.service.util.validator.UserValidator;
@@ -14,6 +15,7 @@ import ru.clevertec.ecl.service.exception.ExceptionCode;
 import java.util.List;
 
 @Service
+@Log
 public class UserServiceImpl implements UserService {
 
     private final UserValidator userValidator;
