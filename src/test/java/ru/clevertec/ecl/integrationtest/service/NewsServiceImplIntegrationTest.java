@@ -1,8 +1,9 @@
-package ru.clevertec.ecl.service.integrationtest;
+package ru.clevertec.ecl.integrationtest.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import ru.clevertec.ecl.integrationtest.BaseIntegrationTest;
 import ru.clevertec.ecl.repository.entity.News;
 import ru.clevertec.ecl.service.exception.EntityException;
 import ru.clevertec.ecl.service.exception.ExceptionCode;

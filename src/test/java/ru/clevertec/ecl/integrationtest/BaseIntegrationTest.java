@@ -1,4 +1,4 @@
-package ru.clevertec.ecl.service.integrationtest;
+package ru.clevertec.ecl.integrationtest;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.context.SpringBootTest;

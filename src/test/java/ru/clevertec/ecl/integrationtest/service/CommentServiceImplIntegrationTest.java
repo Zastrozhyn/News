@@ -1,8 +1,9 @@
-package ru.clevertec.ecl.service.integrationtest;
+package ru.clevertec.ecl.integrationtest.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import ru.clevertec.ecl.integrationtest.BaseIntegrationTest;
 import ru.clevertec.ecl.repository.entity.Comment;
 import ru.clevertec.ecl.service.exception.EntityException;
 import ru.clevertec.ecl.service.exception.ExceptionCode;
@@ -13,7 +14,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class CommentServiceImplIntegrationTest extends BaseIntegrationTest{
+public class CommentServiceImplIntegrationTest extends BaseIntegrationTest {
     private static final long EXISTING_COMMENT_ID = 2;
     private static final long EXISTING_NEWS_ID = 2;
     private static final long EXISTING_USER_ID = 2;
