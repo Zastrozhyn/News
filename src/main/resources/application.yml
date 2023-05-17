@@ -2,7 +2,7 @@ spring:
   datasource:
     password: postgres
     username: postgres
-    url: jdbc:postgresql://localhost:5432/news
+    url: jdbc:postgresql://postgres:5432/news
   liquibase:
     enabled: true
   jpa:
