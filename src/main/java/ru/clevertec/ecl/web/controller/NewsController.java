@@ -1,5 +1,6 @@
 package ru.clevertec.ecl.web.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import ru.clevertec.ecl.web.mapper.NewsMapper;
 import java.util.List;
 
 @Log
+@Tag(name = "News api", description = "News management")
 @RestController
 @RequestMapping("/news")
 public class NewsController {
