@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 
 import static ru.clevertec.ecl.service.util.validator.ValidationConstant.*;
 
+/**
+ * Validation of Comment
+ */
 @Component
 public class CommentValidator {
     public boolean isCommentValid(Comment comment) {

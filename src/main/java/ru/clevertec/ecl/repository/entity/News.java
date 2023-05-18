@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * News entity for managing with database
+ */
 @Getter
 @Setter
 @AllArgsConstructor

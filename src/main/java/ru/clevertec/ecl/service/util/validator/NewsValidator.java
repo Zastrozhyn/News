@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 
 import static ru.clevertec.ecl.service.util.validator.ValidationConstant.*;
 
+/**
+ * Validation of News
+ */
 @Component
 public class NewsValidator {
     public boolean isNewsValid(News news) {

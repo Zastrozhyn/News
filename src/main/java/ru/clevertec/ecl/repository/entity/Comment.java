@@ -9,6 +9,9 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * Comment entity for managing with database
+ */
 @Getter
 @Setter
 @NoArgsConstructor

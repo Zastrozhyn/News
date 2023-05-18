@@ -5,6 +5,10 @@ import ru.clevertec.ecl.repository.cache.MyCache;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 
+/**
+ * LFU cache implementation
+ * @param <T> entity
+ */
 public class LFUCacheImpl<T> implements MyCache<T> {
     private static final Long ONE = 1L;
     private final HashMap<Long, T> values = new HashMap<>();
@@ -18,6 +22,11 @@ public class LFUCacheImpl<T> implements MyCache<T> {
         lists.put(ONE, new LinkedHashSet<>());
     }
 
+    /**
+     * Get entity from cache
+     * @param key
+     * @return entity
+     */
     @Override
     public T get(Long key) {
         if (!values.containsKey(key))
@@ -34,6 +43,11 @@ public class LFUCacheImpl<T> implements MyCache<T> {
         return values.get(key);
     }
 
+    /**
+     * Put entity to cache
+     * @param key
+     * @param value entity
+     */
     @Override
     public void put(Long key, T value) {
         if (values.containsKey(key)) {

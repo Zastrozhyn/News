@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
+/**
+ * Proxy class comment repository for using with MyCacheImpl. Override methods, where need cache
+ */
 @Component
 @Profile("dev")
 @Qualifier("commentDao")

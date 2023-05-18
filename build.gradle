@@ -30,9 +30,8 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     implementation project(':log-starter')
     testImplementation 'ch.qos.logback:logback-classic:1.4.7'
-    annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.5.3.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     runtimeOnly 'org.postgresql:postgresql'
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation "org.testcontainers:postgresql:1.17.6"
     testImplementation 'com.github.tomakehurst:wiremock:3.0.0-beta-8'

@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * User entity for managing with database
+ */
 @Getter
 @Setter
 @NoArgsConstructor

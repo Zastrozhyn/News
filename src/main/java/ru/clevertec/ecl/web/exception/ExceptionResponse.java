@@ -1,5 +1,8 @@
 package ru.clevertec.ecl.web.exception;
 
+/**
+ * Exception Response
+ */
 public class ExceptionResponse {
     private final String errorMessage;
     private final int errorCode;

@@ -16,6 +16,9 @@ import ru.clevertec.ecl.web.mapper.NewsMapper;
 
 import java.util.List;
 
+/**
+ * REST controller for news
+ */
 @Log
 @Tag(name = "News api", description = "News management")
 @RestController
@@ -33,12 +36,22 @@ public class NewsController {
     }
 
 
+    /**
+     * @param newsDto
+     * @return NewsDto
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public NewsDto createNews(@RequestBody NewsDto newsDto) {
         return mapper.mapToDto(newsService.createNews(mapper.mapToEntity(newsDto)));
     }
 
+    /**
+     * @param userId
+     * @param text
+     * @param newsId
+     * @return NewsDto
+     */
     @PostMapping("/{newsId}")
     @ResponseStatus(HttpStatus.CREATED)
     public NewsDto createComment(@RequestParam(name = "userId") Long userId,
@@ -48,6 +61,11 @@ public class NewsController {
         return mapper.mapToDto(newsService.findNewsById(newsId));
     }
 
+    /**
+     * @param commentId
+     * @param newsId
+     * @return NewsDto
+     */
     @PatchMapping("/{newsId}")
     public NewsDto deleteComment(@RequestParam(name = "commentId") Long commentId,
                                  @PathVariable Long newsId) {
@@ -55,6 +73,10 @@ public class NewsController {
         return mapper.mapToDto(newsService.findNewsById(newsId));
     }
 
+    /**
+     * @param id
+     * @return NewsDto
+     */
     @GetMapping("/{id}")
     public NewsDto findNewsById(@PathVariable Long id) {
         return mapper.mapToDto(newsService.findNewsById(id));
@@ -65,22 +87,30 @@ public class NewsController {
                                      @RequestParam(required = false, name = "text") String text,
                                      @RequestParam(required = false, name = "title") String title,
                                      Pageable pageable) {
-        if(search != null){
+        if(search != null) {
             SearchFilter filter = new SearchFilter(text, title);
             return mapper.mapToDto(newsService.findAllByFilter(pageable, filter));
         }
         return mapper.mapToDto(newsService.findAllNews(pageable));
     }
 
+    /**
+     * @param newsId
+     */
     @DeleteMapping(value = "/{newsId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteNews(@PathVariable(name = "newsId") Long newsId) {
         newsService.deleteNews(newsId);
     }
 
+    /**
+     * @param newsId
+     * @param newsDto
+     * @return NewsDto
+     */
     @PutMapping("/{newsId}")
     public NewsDto updateNews(@PathVariable(name = "newsId") Long newsId,
-                              @RequestBody NewsDto newsDto){
+                              @RequestBody NewsDto newsDto) {
         newsDto.setId(newsId);
         return mapper.mapToDto(newsService.updateNews(mapper.mapToEntity(newsDto)));
     }

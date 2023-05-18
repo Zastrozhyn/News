@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 
 import static ru.clevertec.ecl.service.util.validator.ValidationConstant.*;
 
+/**
+ * User validation
+ */
 @Component
 public class UserValidator {
     public boolean isUserValid(User user) {

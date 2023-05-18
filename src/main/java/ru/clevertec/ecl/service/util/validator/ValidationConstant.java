@@ -1,5 +1,9 @@
 package ru.clevertec.ecl.service.util.validator;
 
+
+/**
+ * Constants for validation process
+ */
 public class ValidationConstant {
     public static final int MAX_COMMENT_TEXT_LENGTH = 250;
     public static final int MIN_COMMENT_TEXT_LENGTH = 2;

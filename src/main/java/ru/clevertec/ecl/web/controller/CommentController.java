@@ -14,6 +14,9 @@ import ru.clevertec.ecl.web.mapper.CommentMapper;
 
 import java.util.List;
 
+/**
+ * Rest controller for comments
+ */
 @Log
 @Tag(name = "Comment api", description = "Comment management")
 @RestController
@@ -27,21 +30,37 @@ public class CommentController {
         this.commentService = commentService;
     }
 
+    /**
+     * @param id
+     * @return CommentDto
+     */
     @GetMapping("/{id}")
     public CommentDto findCommentById(@PathVariable Long id) {
         return mapper.mapToDto(commentService.findCommentById(id));
     }
 
+    /**
+     * @param search
+     * @param text
+     * @param pageable
+     * @return List of CommentDto
+     */
     @GetMapping()
     public List<CommentDto> findAllComment(@RequestParam(required = false, name = "search") String search,
                                            @RequestParam(required = false, name = "text") String text,
                                            Pageable pageable) {
-        if(search != null){
+        if(search != null) {
             SearchFilter filter = new SearchFilter(text, null);
             return mapper.mapToDto(commentService.findByFilter(filter, pageable));
         }
         return mapper.mapToDto(commentService.findAllComment(pageable));
     }
+
+    /**
+     * @param commentId
+     * @param commentDto
+     * @return CommentDto
+     */
     @PutMapping("/{commentId}")
     public CommentDto updateComment(@PathVariable Long commentId,
                               @RequestBody CommentDto commentDto) {
@@ -49,4 +68,5 @@ public class CommentController {
         commentDto.setId(commentId);
         return mapper.mapToDto(commentService.updateComment(mapper.mapToEntity(commentDto)));
     }
+
 }

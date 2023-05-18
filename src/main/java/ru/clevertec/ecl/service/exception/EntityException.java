@@ -4,6 +4,9 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+/**
+ * EntityException class for providing entire exceptions with error code and time
+ */
 @Getter
 public class EntityException extends RuntimeException {
     private final String timeStamp;

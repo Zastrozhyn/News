@@ -1,5 +1,9 @@
 package ru.clevertec.ecl.service.exception;
 
+
+/**
+ * Exception codes
+ */
 public enum ExceptionCode {
     USER_NOT_FOUND(40101),
     NOT_VALID_USER_NAME(40102),

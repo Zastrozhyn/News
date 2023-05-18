@@ -11,6 +11,9 @@ import ru.clevertec.ecl.repository.entity.Comment;
 import ru.clevertec.ecl.repository.entity.News;
 import ru.clevertec.ecl.repository.entity.User;
 
+/**
+ * Configuration class for MyCache implementation
+ */
 @Configuration
 public class CacheConfig {
     @Value("${cache.type}")
@@ -19,9 +22,9 @@ public class CacheConfig {
     private int cacheCapacity;
 
     @Bean
-    public MyCache<News> getNewsCache(){
+    public MyCache<News> getNewsCache() {
         MyCache<News> cache;
-        if (cacheType.equals("LFU")){
+        if (cacheType.equals("LFU")) {
             cache =  new LFUCacheImpl<>(cacheCapacity);
         } else {
             cache = new LRUCacheImpl<>(cacheCapacity);
@@ -30,9 +33,9 @@ public class CacheConfig {
     }
 
     @Bean
-    public MyCache<User> getUserCache(){
+    public MyCache<User> getUserCache() {
         MyCache<User> cache;
-        if (cacheType.equals("LFU")){
+        if (cacheType.equals("LFU")) {
             cache =  new LFUCacheImpl<>(cacheCapacity);
         } else {
             cache = new LRUCacheImpl<>(cacheCapacity);
@@ -41,9 +44,9 @@ public class CacheConfig {
     }
 
     @Bean
-    public MyCache<Comment> getCommentCache(){
+    public MyCache<Comment> getCommentCache() {
         MyCache<Comment> cache;
-        if (cacheType.equals("LFU")){
+        if (cacheType.equals("LFU")) {
             cache =  new LFUCacheImpl<>(cacheCapacity);
         } else {
             cache = new LRUCacheImpl<>(cacheCapacity);

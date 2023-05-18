@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Controller for managing exceptions
+ */
 @ControllerAdvice
 public class ExceptionControllerAdviser {
     private static final List<String> AVAILABLE_LOCALES = List.of("en_US", "ru_RU");
