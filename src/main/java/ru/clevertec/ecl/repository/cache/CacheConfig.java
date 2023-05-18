@@ -51,9 +51,4 @@ public class CacheConfig {
         return cache;
     }
 
-    @Bean
-    @Profile("prod")
-    public RedisCacheConfiguration cacheConfiguration() {
-        return RedisCacheConfiguration.defaultCacheConfig();
-    }
 }
