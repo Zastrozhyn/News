@@ -17,3 +17,11 @@ services:
       - "8080:8080"
     links:
       - postgres
+      - cache
+
+  cache:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    restart: unless-stopped

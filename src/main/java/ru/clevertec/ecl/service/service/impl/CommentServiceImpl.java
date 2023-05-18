@@ -2,6 +2,8 @@ package ru.clevertec.ecl.service.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.ecl.repository.dao.CommentRepository;
@@ -28,7 +30,7 @@ public class CommentServiceImpl implements CommentService {
     private final NewsService newsService;
 
     @Autowired
-    public CommentServiceImpl(CommentValidator commentValidator, @Qualifier("commentDaoProxy")CommentRepository commentRepository,
+    public CommentServiceImpl(CommentValidator commentValidator, @Qualifier("commentDao")CommentRepository commentRepository,
                               UserService userService, NewsService newsService) {
         this.commentValidator = commentValidator;
         this.commentRepository = commentRepository;
@@ -52,11 +54,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Cacheable(value = "comment", key = "#commentId")
     public Comment findCommentById(Long commentId) {
         return commentRepository.findById(commentId).orElseThrow(() -> new EntityException(ExceptionCode.COMMENT_NOT_FOUND.getErrorCode()));
     }
 
     @Override
+    @Cacheable("comments")
     public List<Comment> findAllComment(Pageable pageable) {
         return commentRepository.findAll(pageable).getContent();
     }
@@ -73,6 +77,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "comment", key = "#commentId")
     public void deleteComment(Long commentId, Long newsId) {
         Comment comment = findCommentById(commentId);
         News news = newsService.findNewsById(newsId);
@@ -82,6 +87,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Cacheable("comments")
     public List<Comment> findByFilter(SearchFilter filter, Pageable pageable) {
         return commentRepository.findAllByTextContainingIgnoreCase(pageable, filter.text()).getContent();
     }

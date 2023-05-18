@@ -2,6 +2,8 @@ package ru.clevertec.ecl.service.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import ru.clevertec.ecl.repository.dao.NewsRepository;
 import ru.clevertec.ecl.repository.entity.News;
@@ -21,7 +23,7 @@ public class NewsServiceImpl implements NewsService {
     private final NewsRepository newsRepository;
 
     @Autowired
-    public NewsServiceImpl(NewsValidator newsValidator, @Qualifier("newsDaoProxy")NewsRepository newsRepository) {
+    public NewsServiceImpl(NewsValidator newsValidator, @Qualifier("newsDao")NewsRepository newsRepository) {
         this.newsValidator = newsValidator;
         this.newsRepository = newsRepository;
     }
@@ -36,11 +38,13 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @Cacheable(value = "news", key = "#newsId")
     public News findNewsById(Long newsId) {
         return newsRepository.findById(newsId).orElseThrow(() -> new EntityException(ExceptionCode.NEWS_NOT_FOUND.getErrorCode()));
     }
 
     @Override
+    @Cacheable("news")
     public List<News> findAllNews(Pageable pageable) {
         return newsRepository.findAll(pageable).getContent();
     }
@@ -57,6 +61,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @CacheEvict(value = "news", key = "#id", allEntries = true)
     public void deleteNews(Long newsId) {
         if (!newsRepository.existsById(newsId)) {
             throw new EntityException(ExceptionCode.NEWS_NOT_FOUND.getErrorCode());
@@ -65,6 +70,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @Cacheable("news")
     public List<News> findAllByFilter(Pageable pageable, SearchFilter filter) {
         return newsRepository
                 .findAllByTextContainingIgnoreCaseOrTitleContainingIgnoreCase(pageable, filter.text(), filter.title())

@@ -1,7 +1,9 @@
 package ru.clevertec.ecl.repository.proxy;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +19,8 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Component
-
+@Profile("dev")
+@Qualifier("newsDao")
 public class NewsDaoProxy implements NewsRepository {
 
     private final NewsRepository newsRepository;

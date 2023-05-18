@@ -7,6 +7,14 @@ spring:
     enabled: true
   jpa:
     show-sql: true
+  profiles:
+    active: prod
+  cache:
+    type: redis
+  data:
+    redis:
+      port: 6379
+      host: cache
 cache:
   capacity: 10
   type: LRU

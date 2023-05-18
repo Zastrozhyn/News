@@ -3,6 +3,7 @@ package ru.clevertec.ecl.repository.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 @EqualsAndHashCode
 @Entity
 @Table(name = "news")
-public class News implements BaseEntity<Long>{
+public class News implements BaseEntity<Long>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

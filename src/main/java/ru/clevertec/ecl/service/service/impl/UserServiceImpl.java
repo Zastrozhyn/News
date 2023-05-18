@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserValidator userValidator, @Qualifier("userDaoProxy")UserRepository userRepository) {
+    public UserServiceImpl(UserValidator userValidator, @Qualifier("userDao")UserRepository userRepository) {
         this.userValidator = userValidator;
         this.userRepository = userRepository;
     }
