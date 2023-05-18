@@ -1,4 +1,4 @@
-package ru.clevertec.ecl.service.annotation.aspect;
+package ru.clevertec.ecl.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -10,15 +10,14 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Aspect
-@Component
 @Slf4j
 public class LogAspect {
 
-    @Pointcut("execution(@ru.clevertec.ecl.service.annotation.Log * *(..))")
+    @Pointcut("execution(@ru.clevertec.ecl.annotation.Log * *(..))")
     private void annotatedMethods() {
     }
 
-    @Pointcut("within(@ru.clevertec.ecl.service.annotation.Log *)")
+    @Pointcut("within(@ru.clevertec.ecl.annotation.Log *)")
     private void annotatedClass() {
     }
 

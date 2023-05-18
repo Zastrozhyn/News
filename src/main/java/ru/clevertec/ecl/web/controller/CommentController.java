@@ -1,11 +1,12 @@
 package ru.clevertec.ecl.web.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import ru.clevertec.ecl.service.annotation.Log;
+import ru.clevertec.ecl.annotation.Log;
 import ru.clevertec.ecl.service.service.CommentService;
 import ru.clevertec.ecl.web.dto.CommentDto;
 import ru.clevertec.ecl.web.dto.SearchFilter;

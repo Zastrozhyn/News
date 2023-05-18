@@ -6,6 +6,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
+import ru.clevertec.ecl.annotation.Log;
 import ru.clevertec.ecl.repository.dao.CommentRepository;
 import ru.clevertec.ecl.repository.entity.Comment;
 import ru.clevertec.ecl.repository.entity.News;
@@ -21,6 +22,7 @@ import ru.clevertec.ecl.web.dto.SearchFilter;
 
 import java.util.List;
 
+@Log
 @Service
 public class CommentServiceImpl implements CommentService {
 

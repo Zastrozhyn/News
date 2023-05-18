@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
+import ru.clevertec.ecl.annotation.Log;
 import ru.clevertec.ecl.repository.dao.NewsRepository;
 import ru.clevertec.ecl.repository.entity.News;
 import ru.clevertec.ecl.service.exception.EntityException;
@@ -16,6 +17,7 @@ import ru.clevertec.ecl.web.dto.SearchFilter;
 
 import java.util.List;
 
+@Log
 @Service
 public class NewsServiceImpl implements NewsService {
 
@@ -61,7 +63,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    @CacheEvict(value = "news", key = "#id", allEntries = true)
+    @CacheEvict(value = "news", key = "#newsId", allEntries = true)
     public void deleteNews(Long newsId) {
         if (!newsRepository.existsById(newsId)) {
             throw new EntityException(ExceptionCode.NEWS_NOT_FOUND.getErrorCode());

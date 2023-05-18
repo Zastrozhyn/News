@@ -1,4 +1,4 @@
-package ru.clevertec.ecl.service.annotation;
+package ru.clevertec.ecl.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

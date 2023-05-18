@@ -3,9 +3,9 @@ package ru.clevertec.ecl.service.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
+import ru.clevertec.ecl.annotation.Log;
 import ru.clevertec.ecl.repository.dao.UserRepository;
 import ru.clevertec.ecl.repository.entity.User;
-import ru.clevertec.ecl.service.annotation.Log;
 import ru.clevertec.ecl.service.exception.EntityException;
 import ru.clevertec.ecl.service.service.UserService;
 import ru.clevertec.ecl.service.util.validator.UserValidator;
@@ -14,8 +14,8 @@ import ru.clevertec.ecl.service.exception.ExceptionCode;
 
 import java.util.List;
 
-@Service
 @Log
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserValidator userValidator;
