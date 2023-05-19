@@ -1,0 +1,27 @@
+version: "3'.9"
+
+services:
+  postgres:
+    image: postgres:13.3
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: news
+
+  app:
+    build: ./
+    container_name: 'news.app'
+    ports:
+      - "8080:8080"
+    links:
+      - postgres
+      - cache
+
+  cache:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    restart: unless-stopped

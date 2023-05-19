@@ -1,0 +1,93 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tables
+      author: Zastrozhyn
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+              - column:
+                  name: role
+                  type: varchar
+        - createTable:
+            tableName: news
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: create_time
+                  type: timestamp
+              - column:
+                  name: update_time
+                  type: timestamp
+              - column:
+                  name: title
+                  type: varchar
+              - column:
+                  name: text
+                  type: varchar
+        - createTable:
+            tableName: comment
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: create_time
+                  type: timestamp
+              - column:
+                  name: update_time
+                  type: timestamp
+              - column:
+                  name: text
+                  type: varchar
+              - column:
+                  name: news_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: comment_news_id_fk
+                    referencedTableName: news
+                    referencedColumnNames: id
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: comment_users_id_fk
+                    referencedTableName: users
+                    referencedColumnNames: id
+        - createTable:
+            tableName: news_comments
+            columns:
+              - column:
+                  name: news_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: news_comments_news_id_fk
+                    referencedTableName: news
+                    referencedColumnNames: id
+              - column:
+                  name: comments_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: news_comments_comment_id_fk
+                    referencedTableName: comment
+                    referencedColumnNames: id
